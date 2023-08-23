@@ -1,20 +1,21 @@
 package com.tech.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 @Entity
 public class Customer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int addharNo;
+
 	private int accountNumber;
 
 	private String cusName;
@@ -28,8 +29,27 @@ public class Customer {
 	private String password;
 
 	private double totalAmount;
+	
+	@OneToMany(mappedBy = "customer")
+	private List<Transction1> transction;
+	
+	public List<Transction1> getTransction() {
+		return transction;
+	}
 
-   @Temporal(TemporalType.TIMESTAMP)
+	public void setTransction(List<Transction1> transction) {
+		this.transction = transction;
+	}
+
+	public int getAddharNo() {
+		return addharNo;
+	}
+
+	public void setAddharNo(int addharNo) {
+		this.addharNo = addharNo;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 
 	public Date getDate() {
@@ -96,5 +116,4 @@ public class Customer {
 		this.totalAmount = totalAmount;
 	}
 
-	
 }
